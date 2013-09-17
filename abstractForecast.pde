@@ -14,8 +14,11 @@ void setup() {
 
   // Draw a weather block.
   // Arguments are startX, startY, sunny, blue, cloudy, rainy
-  drawWeatherBlock( (16 + (32*4) * 0), 16, 75, 25,  0,  0);
-
+  drawWeatherBlock( (16+(128*0)), 16, 75, 25,  0,  0,  0 );
+  drawWeatherBlock( (16+(128*1)), 16, 75, 25,  0,  0,  0 );
+  drawWeatherBlock( (16+(128*2)), 16, 75, 25,  0,  0,  0 );
+  drawWeatherBlock( (16+(128*3)), 16, 75, 25,  0,  0,  0 );
+  drawWeatherBlock( (16+(128*4)), 16, 75, 25,  0,  0,  0 );
 
   H.drawStage();
 }
@@ -32,16 +35,17 @@ void draw() {
 
     The other variables set the proportion of weather colors to 
     put in the pool that we'll pick fill colors from. */
-    
+
 void drawWeatherBlock ( int myStartX, int myStartY,
-                        int sunny, int blue, int cloudy, int rain) {
+                        int sunny, int bluey, int cloudy, 
+                        int rain, int meteors ) {
   // Put some weather-related colors in a pool.
   weatherColors = new HColorPool()
-  .add(#FFE800, sunny)  // sunny
-  .add(#8FDDF0, blue)  // blue skies
+  .add(#FFE800, sunny)   // sunny
+  .add(#8FDDF0, bluey)    // blue skies
   .add(#CCCCCC, cloudy)  // cloudy
-  .add(#333333, rain)  // rain cloudy
-  .add(#9E4AFF, 0)  // lavender.  why?  don't know.
+  .add(#333333, rain)    // rain cloudy
+  .add(#9E4AFF, meteors) // lavender.  why?  don't know.
   ;
 
   // Throw sixteen HRects in a pool.  Pool might be useful later.
