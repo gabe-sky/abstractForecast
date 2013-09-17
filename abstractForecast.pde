@@ -13,12 +13,13 @@ void setup() {
   H.init(this).background(#202020);
 
   // Draw a weather block.
-  // Arguments are startX, startY, sunny, blue, cloudy, rainy
-  drawWeatherBlock( (16+(128*0)), 16, 75, 25,  0,  0,  0 );
-  drawWeatherBlock( (16+(128*1)), 16, 75, 25,  0,  0,  0 );
-  drawWeatherBlock( (16+(128*2)), 16, 75, 25,  0,  0,  0 );
-  drawWeatherBlock( (16+(128*3)), 16, 75, 25,  0,  0,  0 );
-  drawWeatherBlock( (16+(128*4)), 16, 75, 25,  0,  0,  0 );
+  // Arguments are startX, startY,
+  // sunny, bluey, cloudy, rainy, meteors
+  drawWeatherBlock( (16+(128*0)), 16, 10, 80, 10,  0,  0 );
+  drawWeatherBlock( (16+(128*1)), 16, 10, 60, 30,  0,  0 );
+  drawWeatherBlock( (16+(128*2)), 16, 10, 20, 70,  0,  0 );
+  drawWeatherBlock( (16+(128*3)), 16,  0,  0, 70, 30,  0 );
+  drawWeatherBlock( (16+(128*4)), 16,  0,  0, 80, 15,  5 );
 
   H.drawStage();
 }
