@@ -1,15 +1,22 @@
+/*  Abstract Forecast
+
+    This Processing sketch queries the Yahoo weather API to get a
+    five-day forecast for a location.  It then draws a four-by-four
+    block of colored squares to represent a day's forecast.  It draws
+    one for each day, across the page.
+
+                                                          */
 
 
-// Used by drawWeatherBlock -- TO DO move to local scope
-HDrawablePool squarePool;
-HColorPool weatherColors;
+// Your Yahoo weather Where On Earth ID.  Tips here:
+//   http://developer.yahoo.com/weather/#req
 
-// Set this to your Yahoo GeoPlanet Where On Earth ID (WOEID)
 String myWOEID = "2487889";
 
 
+// Everything happens in setup().  We just run once.
 void setup() {
-  size(640,480);
+  size(640,128);
   smooth();
   noLoop();
 
@@ -20,12 +27,23 @@ void setup() {
   int[] forecastCodes = fetchForecastCodes();
 
   // Iterate through the five day forecast, draw blocks for each.
-  int[] pro = new int[5];
+  int[] proportion = new int[5];
   for ( int i = 0 ; i < 5 ; i++ ) {
-    pro = convertCodeToProportion(forecastCodes[i]);
-    drawWeatherBlock( ( 16+(128*i)), 16,
-                        pro[0], pro[1], pro[2],
-                        pro[3], pro[4] );
+    proportion = convertCodeToProportion(forecastCodes[i]);
+    drawWeatherBlock(( 16 + (128*i) ), 16,
+                      proportion[0],
+                      proportion[1],
+                      proportion[2],
+                      proportion[3],
+                      proportion[4] 
+                    );
+    // DEBUG
+    print( "day " + i + ", code " + forecastCodes[i] );
+    print( " sunny, " + proportion[0] );
+    print( " blue, " + proportion[1] );
+    print( " cloudy, " + proportion[2] );
+    print( " rainy, " + proportion[3] );
+    println( " meteors, " + proportion[4] );
   }
 
 
@@ -33,6 +51,7 @@ void setup() {
   H.drawStage();
 }
 
+// Everything happens in setup(), we only run once.
 void draw() {
 
 }
@@ -52,7 +71,7 @@ void drawWeatherBlock ( int myStartX, int myStartY,
                         int sunny, int bluey, int cloudy, 
                         int rain, int meteors ) {
   // Put some weather-related colors in a pool.
-  weatherColors = new HColorPool()
+  final HColorPool weatherColors = new HColorPool()
   .add(#FFE800, sunny)   // sunny
   .add(#8FDDF0, bluey)    // blue skies
   .add(#CCCCCC, cloudy)  // cloudy
@@ -61,7 +80,7 @@ void drawWeatherBlock ( int myStartX, int myStartY,
   ;
 
   // Throw sixteen boring HRects in a pool.
-  squarePool = new HDrawablePool(16)
+  HDrawablePool squarePool = new HDrawablePool(16)
     .autoAddToStage()
     .add ( 
       new HRect(), 16
@@ -116,8 +135,8 @@ int[] fetchForecastCodes() {
   System.setProperty("http.agent", "abstractForecast; https://github.com/fnaard/abstractForecast;");
   
   // Fetch weather forecast for myWOEID, which is set up top.
-  // XML weatherXML = loadXML("http://xml.weather.yahoo.com/forecastrss?w=" + myWOEID);
-  XML weatherXML = loadXML("forecastrss.xml");  // DEBUG
+  XML weatherXML = loadXML("http://xml.weather.yahoo.com/forecastrss?w=" + myWOEID);
+  // XML weatherXML = loadXML("forecastrss.xml");  // DEBUG
 
   XML forecastXML[] = weatherXML.getChildren("channel/item/yweather:forecast");
 
@@ -132,26 +151,37 @@ int[] fetchForecastCodes() {
   int[] convertCodeToProportion()
   Take a Yahoo forecast "code" and return a proportion of colors
   to use when you want to draw a block.
+
+  Human readable equivalents of the codes are located here:
+    http://developer.yahoo.com/weather/#codes
                                               */
 
 int[] convertCodeToProportion( int forecastCode ) {
   int colorProportion[] = new int[5];
 
+  //                        { sunny, blue, cloudy, rainy, meteors }
   switch(forecastCode) {
-    case 32:
-      colorProportion[0] = 10;
-      colorProportion[1] = 20;
-      colorProportion[2] = 50;
-      colorProportion[3] = 10;
-      colorProportion[4] = 10;
-      break;
-    default:
-      colorProportion[0] = 90;
-      colorProportion[1] = 10;
-      colorProportion[2] =  0;
-      colorProportion[3] =  0;
-      colorProportion[4] =  0;
-      break;
+    case 26:  // cloudy
+      colorProportion = new int[] {  0, 10, 90,  0,  0}; break;
+    case 27:  // mostly cloudy night
+      colorProportion = new int[] {  0, 25, 75,  0,  0}; break;
+    case 28:  // mostly cloudy day
+      colorProportion = new int[] {  0, 25, 75,  0,  0}; break;
+    case 29:  // partly cloudy night
+      colorProportion = new int[] {  0, 50, 50,  0,  0}; break;
+    case 30:  // partly cloudy day
+      colorProportion = new int[] {  0, 50, 50,  0,  0}; break;
+    case 31:  // clear night
+      colorProportion = new int[] {  0, 90, 10,  0,  0}; break;
+    case 32:  // sunny
+      colorProportion = new int[] {  50, 50, 0,  0,  0}; break;
+    case 33:  // fair night
+      colorProportion = new int[] {  0, 90, 10,  0,  0}; break;
+    case 34:  // fair day
+      colorProportion = new int[] {  0, 90, 10,  0,  0}; break;
+
+    default:  // anything not yet proportionized
+      colorProportion = new int[] {  0, 0, 25,  25,  50}; break;
   }
   return colorProportion;
 }
