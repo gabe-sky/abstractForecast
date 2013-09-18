@@ -8,28 +8,28 @@
                                                           */
 
 
-// Your Yahoo weather Where On Earth ID.  Tips here:
+// First specify your Yahoo weather Where On Earth ID.  Tips here:
 //   http://developer.yahoo.com/weather/#req
 
 String myWOEID = "2487889";
 
 
 // Everything happens in setup().  We just run once.
+
 void setup() {
   size(640,128);
   smooth();
   noLoop();
 
-  // Initialize HYPE
+  // Initialize HYPE with a grey background.
   H.init(this).background(#202020);
 
-  // Fetch the first five days' Yahoo weather forecasts for our WOEID.
+  // Fetch the first five days' Yahoo weather forecast codes for our WOEID.
   int[] forecastCodes = fetchForecastCodes();
 
-  // Iterate through the five day forecast, draw blocks for each.
-  int[] proportion = new int[5];
+  // Iterate through the five day forecast, draw a block for each, in a row.
   for ( int i = 0 ; i < 5 ; i++ ) {
-    proportion = convertCodeToProportion(forecastCodes[i]);
+    int[] proportion = convertCodeToProportion(forecastCodes[i]);
     drawWeatherBlock(( 16 + (128*i) ), 16,
                       proportion[0],
                       proportion[1],
@@ -38,17 +38,19 @@ void setup() {
                       proportion[4] 
                     );
     // DEBUG
-    print( "day " + i + ", code " + forecastCodes[i] );
-    print( " sunny, " + proportion[0] );
-    print( " blue, " + proportion[1] );
-    print( " cloudy, " + proportion[2] );
-    print( " rainy, " + proportion[3] );
-    println( " meteors, " + proportion[4] );
+    // print( "day: " + i + "  code: " + forecastCodes[i] + "  {");
+    // print( " sunny: " + proportion[0] );
+    // print( "  blue: " + proportion[1] );
+    // print( "  cloudy: " + proportion[2] );
+    // print( "  rainy: " + proportion[3] );
+    // print( "  meteors: " + proportion[4] );
+    // println(" }");
   }
 
 
   // Show it.
   H.drawStage();
+
 }
 
 // Everything happens in setup(), we only run once.
@@ -145,6 +147,7 @@ int[] fetchForecastCodes() {
   }
 
   return fetchedForecastCodes;
+
 }
 
 /*
@@ -157,9 +160,10 @@ int[] fetchForecastCodes() {
                                               */
 
 int[] convertCodeToProportion( int forecastCode ) {
+  
   int colorProportion[] = new int[5];
 
-  //                        { sunny, blue, cloudy, rainy, meteors }
+  //                       { sunny, blue, cloudy, rainy, meteors }
   switch(forecastCode) {
     case 26:  // cloudy
       colorProportion = new int[] {  0, 10, 90,  0,  0}; break;
@@ -174,7 +178,7 @@ int[] convertCodeToProportion( int forecastCode ) {
     case 31:  // clear night
       colorProportion = new int[] {  0, 90, 10,  0,  0}; break;
     case 32:  // sunny
-      colorProportion = new int[] {  50, 50, 0,  0,  0}; break;
+      colorProportion = new int[] { 50, 50,  0,  0,  0}; break;
     case 33:  // fair night
       colorProportion = new int[] {  0, 90, 10,  0,  0}; break;
     case 34:  // fair day
