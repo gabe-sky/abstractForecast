@@ -138,8 +138,8 @@ int[] fetchForecastCodes() {
   System.setProperty("http.agent", "abstractForecast; https://github.com/fnaard/abstractForecast;");
   
   // Fetch weather forecast for myWOEID, which is set up top.
-  // XML weatherXML = loadXML("http://xml.weather.yahoo.com/forecastrss?w=" + myWOEID);
-  XML weatherXML = loadXML("forecastrss.xml");  // DEBUG
+  XML weatherXML = loadXML("http://xml.weather.yahoo.com/forecastrss?w=" + myWOEID);
+  // XML weatherXML = loadXML("forecastrss.xml");  // DEBUG
 
   XML forecastXML[] = weatherXML.getChildren("channel/item/yweather:forecast");
 
