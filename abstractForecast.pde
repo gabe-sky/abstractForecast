@@ -5,7 +5,7 @@
     block of colored squares to represent a day's forecast.  It draws
     one for each day, across the page.
 
-                                                          */
+*/
 
 
 // First specify your Yahoo weather Where On Earth ID.  Tips here:
@@ -37,6 +37,7 @@ void setup() {
                       proportion[3],
                       proportion[4] 
                     );
+
     // DEBUG
     // print( "day: " + i + "  code: " + forecastCodes[i] + "  {");
     // print( " sunny: " + proportion[0] );
@@ -74,11 +75,11 @@ void drawWeatherBlock ( int myStartX, int myStartY,
                         int rain, int meteors ) {
   // Put some weather-related colors in a pool.
   final HColorPool weatherColors = new HColorPool()
-  .add(#FFE800, sunny)   // sunny
-  .add(#8FDDF0, bluey)    // blue skies
-  .add(#CCCCCC, cloudy)  // cloudy
-  .add(#333333, rain)    // rain cloudy
-  .add(#9E4AFF, meteors) // lavender.  why?  don't know.
+  .add(#FAD020, sunny)    // sunny
+  .add(#1253A0, bluey)    // blue skies
+  .add(#FFFFFF, cloudy)   // cloudy
+  .add(#08080A, rain)     // rain
+  .add(#D62B2C, meteors)  // lavender.  why?  don't know.
   ;
 
   // Throw sixteen boring HRects in a pool.
@@ -137,8 +138,8 @@ int[] fetchForecastCodes() {
   System.setProperty("http.agent", "abstractForecast; https://github.com/fnaard/abstractForecast;");
   
   // Fetch weather forecast for myWOEID, which is set up top.
-  XML weatherXML = loadXML("http://xml.weather.yahoo.com/forecastrss?w=" + myWOEID);
-  // XML weatherXML = loadXML("forecastrss.xml");  // DEBUG
+  // XML weatherXML = loadXML("http://xml.weather.yahoo.com/forecastrss?w=" + myWOEID);
+  XML weatherXML = loadXML("forecastrss.xml");  // DEBUG
 
   XML forecastXML[] = weatherXML.getChildren("channel/item/yweather:forecast");
 
