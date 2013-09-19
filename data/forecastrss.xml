@@ -32,20 +32,20 @@
 <b>Current Conditions:</b><br />
 Partly Cloudy, 70 F<BR />
 <BR /><b>Forecast:</b><BR />
-Tue - Sunny. High: 72 Low: 63<br />
-Wed - Sunny. High: 72 Low: 63<br />
+Tue - Cloudy. High: 72 Low: 63<br />
+Wed - Partly Cloudy (Night). High: 72 Low: 63<br />
 Thu - Sunny. High: 73 Low: 63<br />
-Fri - AM Clouds/PM Sun. High: 72 Low: 63<br />
-Sat - AM Clouds/PM Sun. High: 73 Low: 63<br />
+Fri - Clear (Night). High: 72 Low: 63<br />
+Sat - Fair (Day). High: 73 Low: 63<br />
 <br />
 <a href="http://us.rd.yahoo.com/dailynews/rss/weather/San_Diego__CA/*http://weather.yahoo.com/forecast/USCA0982_f.html">Full Forecast at Yahoo! Weather</a><BR/><BR/>
 (provided by <a href="http://www.weather.com" >The Weather Channel</a>)<br/>
 ]]></description>
-<yweather:forecast day="Tue" date="17 Sep 2013" low="63" high="72" text="Sunny" code="26" />
-<yweather:forecast day="Wed" date="18 Sep 2013" low="63" high="72" text="Sunny" code="29" />
+<yweather:forecast day="Tue" date="17 Sep 2013" low="63" high="72" text="Cloudy" code="26" />
+<yweather:forecast day="Wed" date="18 Sep 2013" low="63" high="72" text="Partly Cloudy (Night)" code="29" />
 <yweather:forecast day="Thu" date="19 Sep 2013" low="63" high="73" text="Sunny" code="32" />
-<yweather:forecast day="Fri" date="20 Sep 2013" low="63" high="72" text="AM Clouds/PM Sun" code="31" />
-<yweather:forecast day="Sat" date="21 Sep 2013" low="63" high="73" text="AM Clouds/PM Sun" code="34" />
+<yweather:forecast day="Fri" date="20 Sep 2013" low="63" high="72" text="Clear (Night)" code="31" />
+<yweather:forecast day="Sat" date="21 Sep 2013" low="63" high="73" text="Fair (Day)" code="34" />
 <guid isPermaLink="false">USCA0982_2013_09_21_7_00_PDT</guid>
 </item>
 </channel>
